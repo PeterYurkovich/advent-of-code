@@ -7,6 +7,7 @@ import (
 	dayTwo "github.com/peteryurkovich/advent-of-code/02"
 	dayThree "github.com/peteryurkovich/advent-of-code/03"
 	dayFour "github.com/peteryurkovich/advent-of-code/04"
+	dayFive "github.com/peteryurkovich/advent-of-code/05"
 )
 
 func main() {
@@ -19,5 +20,7 @@ func main() {
 		dayThree.Three()
 	} else if day == "four" {
 		dayFour.Four()
+	} else if day == "five" {
+		dayFive.Five()
 	}
 }
