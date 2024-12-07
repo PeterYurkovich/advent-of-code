@@ -1,41 +1,18 @@
-package main
+package two
 
 import (
 	"fmt"
 	"os"
 	"strconv"
 	"strings"
+
+	"github.com/peteryurkovich/advent-of-code/helpers"
 )
 
-func assert(passed bool, reason string) {
-	if !passed {
-		panic(reason)
-	}
-}
-
-func assertError(err error) {
-	if err != nil {
-		assert(false, err.Error())
-	}
-}
-
-func Abs(potentiallyNegative int) int {
-	if potentiallyNegative < 0 {
-		return -1 * potentiallyNegative
-	}
-	return potentiallyNegative
-}
-
-func remove(s []int, i int) []int {
-	newArray := make([]int, len(s))
-	copy(newArray, s)
-	return append(newArray[:i], newArray[i+1:]...)
-}
-
-func main() {
+func Two() {
 	fmt.Println("\n\n\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	byteFile, err := os.ReadFile("./a.txt")
-	assertError(err)
+	helpers.AssertError(err)
 	lines := strings.Split(string(byteFile), "\n")
 
 	reports := make([][]int, len(lines))
@@ -45,7 +22,7 @@ func main() {
 		levels := make([]int, len(splitLine))
 		for j, level := range splitLine {
 			intLevel, err := strconv.Atoi(level)
-			assertError(err)
+			helpers.AssertError(err)
 			levels[j] = intLevel
 		}
 		reports[i] = levels
@@ -77,7 +54,7 @@ func main() {
 		}
 		var safe = false
 		for k := 0; k < lenReport; k++ {
-			removedReport := remove(report, k)
+			removedReport := helpers.Remove(report, k)
 			if testReport(removedReport) {
 				safeDampenedCount++
 				safe = true

@@ -1,41 +1,20 @@
-package main
+package one
 
 import (
 	"fmt"
-	"iter"
 	"math"
 	"os"
 	"slices"
 	"strconv"
 	"strings"
+
+	"github.com/peteryurkovich/advent-of-code/helpers"
 )
 
-func assert(passed bool, reason string) {
-	if !passed {
-		panic(reason)
-	}
-}
-
-func assertError(err error) {
-	if err != nil {
-		assert(false, err.Error())
-	}
-}
-
-func Map[T, U any](seq iter.Seq[T], f func(T) U) iter.Seq[U] {
-	return func(yield func(U) bool) {
-		for a := range seq {
-			if !yield(f(a)) {
-				return
-			}
-		}
-	}
-}
-
-func main() {
+func One() {
 	fmt.Println("\n\n\n\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	a, err := os.ReadFile("./a.txt")
-	assertError(err)
+	helpers.AssertError(err)
 	aStringArray := strings.Split(string(a), "\n")
 
 	aListOne := make([]int, len(aStringArray))
@@ -43,11 +22,11 @@ func main() {
 
 	for i, aString := range aStringArray {
 		values := strings.Fields(aString)
-		assert(len(values) == 2, fmt.Sprintf("non 2 value: %s", aString))
+		helpers.Assert(len(values) == 2, fmt.Sprintf("non 2 value: %s", aString))
 		firstValue, err := strconv.Atoi(values[0])
-		assertError(err)
+		helpers.AssertError(err)
 		secondValue, err := strconv.Atoi(values[1])
-		assertError(err)
+		helpers.AssertError(err)
 		aListOne[i] = firstValue
 		aListTwo[i] = secondValue
 	}
@@ -65,7 +44,7 @@ func main() {
 	fmt.Printf("Total Difference: %d\n", aDifference)
 	fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 	b, err := os.ReadFile("./a.txt")
-	assertError(err)
+	helpers.AssertError(err)
 	bStringArray := strings.Split(string(b), "\n")
 
 	bListOne := make([]int, len(bStringArray))
@@ -73,11 +52,11 @@ func main() {
 
 	for i, bString := range bStringArray {
 		values := strings.Fields(bString)
-		assert(len(values) == 2, fmt.Sprintf("non 2 value: %s", bString))
+		helpers.Assert(len(values) == 2, fmt.Sprintf("non 2 value: %s", bString))
 		firstValue, err := strconv.Atoi(values[0])
-		assertError(err)
+		helpers.AssertError(err)
 		secondValue, err := strconv.Atoi(values[1])
-		assertError(err)
+		helpers.AssertError(err)
 		bListOne[i] = firstValue
 		bMapValue, ok := bMapTwo[secondValue]
 		if !ok {
